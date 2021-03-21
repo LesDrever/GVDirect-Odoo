@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 {
     'name': "GVDirect Stock",
-    'summary': "stock module changes",
+    'summary': "Stock module changes",
     'description': """
         Description for Internal Transfers field modifications.
     """,
