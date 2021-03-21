@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <data>
+
+        <record id="gv_view_template_property_form" model="ir.ui.view">
+            <field name="name">gv.product.template.stock.property.form.inherit</field>
+            <field name="model">product.template</field>
+            <field name="inherit_id" ref="stock.view_template_property_form"/>
+            <field name="arch" type="xml">
+                <field name="description_picking" position="replace">
+                    <field name="description_internal_transfer_ids" widget="many2many_tags" nolabel="1"
+                           placeholder="This note is added to internal transfer orders (e.g. where to pick the product in the warehouse)."/>
+                </field>
+            </field>
+        </record>
+
+        <record id="gv_stock_picking_view_form_inherit" model="ir.ui.view">
+            <field name="name">gv.stock.picking.view.form.inherit</field>
+            <field name="model">stock.picking</field>
+            <field name="inherit_id" ref="stock.view_picking_form"/>
+            <field name="arch" type="xml">
+                <xpath expr="//field[@name='move_ids_without_package']//tree/field[@name='product_id']" position="after">
+                    <field name="description_internal_transfer_ids" widget="many2many_tags" attrs="{'readonly': [('state', '=', 'done')]}"/>
+                </xpath>
+            </field>
+        </record>
+
+        <record id="gv_view_stock_move_line_detailed_operation_tree_inherit" model="ir.ui.view">
+            <field name="name">gv.stock.move.line.operations.tree.inherit</field>
+            <field name="model">stock.move.line</field>
+            <field name="inherit_id" ref="stock.view_stock_move_line_detailed_operation_tree"/>
+            <field name="arch" type="xml">
+                <xpath expr="//field[@name='product_id']" position="after">
+                    <field name="description_internal_transfer_ids" widget="many2many_tags" attrs="{'readonly': [('state', '=', 'done')]}"/>
+                </xpath>
+            </field>
+        </record>
+
+    </data>
+</odoo>
