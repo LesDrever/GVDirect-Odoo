@@ -23,7 +23,7 @@ class GVStockMove(models.Model):
 
     @api.onchange('description_internal_transfer_ids')
     def _onchange_description_internal_transfer_ids(self):
-        if not self.product_id:
+        if not self.product_id or self.product_id.description_internal_transfer_ids == self.description_internal_transfer_ids._origin:
             return
         self.product_id.update({'description_internal_transfer_ids': self.description_internal_transfer_ids.ids})
         return {'warning': {
@@ -39,7 +39,7 @@ class GVStockMoveLine(models.Model):
 
     @api.onchange('description_internal_transfer_ids')
     def _onchange_description_internal_transfer_ids(self):
-        if not self.product_id:
+        if not self.product_id or self.product_id.description_internal_transfer_ids == self.description_internal_transfer_ids._origin:
             return
         self.product_id.update({'description_internal_transfer_ids': self.description_internal_transfer_ids.ids})
         return {'warning': {
