@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+
+        <template id="gv_report_picking_inherit" inherit_id="stock.report_picking">
+            <xpath expr="//th[@name='th_product']" position="after">
+                <th name="th_picking_description">
+                    <strong>Picking Description</strong>
+                </th>
+            </xpath>
+            <xpath expr="//span[@t-field='ml.product_id.display_name']/.." position="after">
+                <td>
+                    <span t-field="ml.product_id.description_internal_transfer_ids"/>
+                </td>
+            </xpath>
+            <xpath expr="//span[@t-field='ml.product_id.description_picking']" position="replace"/>
+        </template>
+
+    </data>
+</odoo>
